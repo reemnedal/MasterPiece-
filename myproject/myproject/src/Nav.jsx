@@ -9,7 +9,7 @@ function Nav() {
  const [isOpen, setIsOpen] = useState(false);
 
  return (
-   <nav className="flex items-center justify-between flex-wrap p-6 bg-[#704e81]">
+   <nav className="flex items-center justify-between flex-wrap p-6 bg-[#704e81] sticky top-0 z-50">
      <div  className='text-2xl text-white ml-24  '>
      SESSIONAT 
      </div>
@@ -48,12 +48,18 @@ function Nav() {
          <Link to= "/login#" className="block mt-4  text-lg  lg:inline-block lg:mt-0 text-white   mr-4 hover:bg-[#cfbac3] pl-4 pr-4 rounded">
           Login 
          </Link>
+
+         <Link to= "/booking" className="bg-white text-black block mt-4  text-lg  lg:inline-block lg:mt-0    mr-4 hover:bg-[#cfbac3] pl-4 pr-4 rounded">
+     <button class="">    Book Now</button>
+         </Link>
        </div>
        <div>
          
        </div>
-     </div>  
+     </div>    
    </nav>
+ 
+
  );
 }
 export default Nav;

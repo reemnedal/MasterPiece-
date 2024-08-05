@@ -8,9 +8,12 @@ import Hero from './Hero'
 import Signup from './signup'
 import Login from './Login'
 import Profile from './Profile'
-import Contact from './Contact'
+ 
 import {Route,Routes,BrowserRouter } from "react-router-dom";
-
+import Booking from './Booking'
+import Details from './details'
+import Payment from './Payment'
+ 
 function App() {
   const [count, setCount] = useState(0)
 
@@ -25,11 +28,9 @@ function App() {
   <Profile/> */}
  
  
-
  
-
- <BrowserRouter>
- <Nav/>
+  <BrowserRouter>
+  
  <Routes> 
 
 
@@ -37,14 +38,14 @@ function App() {
    <Route path='/' element={<Hero/>}/>
    <Route path='/signup' element={<Signup/>}/>
    <Route path='/login' element={<Login/>}/>
-    <Route path='/profile' element={<Profile/>}/>
-   <Route path='/contact' element={<Contact/>}/>  
-
-
+    <Route path='/profile' element={<Profile/>}/>  
+   <Route path='/booking' element={<Booking/>}/>  
+   <Route path='/details' element={<Details/>}/>  
+   <Route path='/payment' element={<Payment/>}/>  
+  
  
  </Routes>  
- </BrowserRouter>
-
+ </BrowserRouter>  
  
      </>
   )

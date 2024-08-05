@@ -1,10 +1,11 @@
 import img from './imgs/userr.png'
+import Nav from './Nav';
 
 
 function Profile() {
     return (  
   <>
-  
+<Nav/>  
   <div class="p-16 ml-24 mr-24">
 <div class="p-8 bg-white shadow mt-24">
   <div class="grid grid-cols-1 md:grid-cols-3">

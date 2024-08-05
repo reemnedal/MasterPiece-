@@ -1,9 +1,15 @@
+import Tableuser from "./phoTable";
 
     function Photographer() {
         return (
             
             <>
-           <h1>This is Photographer page </h1>
+        
+
+           <Tableuser/>
+
+           
+
             </>
         );
     }
