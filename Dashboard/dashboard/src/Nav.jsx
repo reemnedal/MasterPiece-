@@ -42,8 +42,8 @@ function Nav() {
 
 
 
-<Route path='/' element={<Photographer/>}/>
- <Route path='/Users' element={<Users/>}/>
+        <Route path='/' element={<Photographer/>}/>
+        <Route path='/Users' element={<Users/>}/>
         <Route path='/Messages' element={<Messages/>}/>
         <Route path='/Booking' element={<Booking/>}/>
 

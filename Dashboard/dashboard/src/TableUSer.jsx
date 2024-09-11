@@ -10,7 +10,7 @@ function Tableuser() {
     <table class="min-w-full bg-white shadow-md rounded-xl ">
       <thead>
         <tr class="bg-blue-gray-100 text-gray-700">
-          <th class="py-3 px-4 text-left">Photographer Name</th>
+          <th class="py-3 px-4 text-left">Username</th>
           <th class="py-3 px-4 text-left">Email</th>
           <th class="py-3 px-4 text-left">Password</th>
           <th class="py-3 px-4 text-left">Phone</th>
@@ -46,7 +46,7 @@ function Tableuser() {
           </td>
         </tr>
          <tr class="border-b border-blue-gray-200">
-          <td class="py-3 px-4 font-medium">Total Photographers</td>
+          <td class="py-3 px-4 font-medium">Total Users</td>
           <td class="py-3 px-4"></td>
           <td class="py-3 px-4"></td>
           <td class="py-3 px-4 font-medium">3</td>

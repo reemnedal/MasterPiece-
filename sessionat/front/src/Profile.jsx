@@ -1,7 +1,8 @@
 import img from './imgs/userr.png'
 import Nav from './Nav';
 
-
+import img3 from "./imgs/tt.png"
+import Footer from './Footer';
 function Profile() {
     return (  
   <>
@@ -24,7 +25,7 @@ function Profile() {
     <div class="relative">
       <div class="w-48 h-48 bg-[#704e81] mx-auto  rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
  
-  
+  <img src={img3} alt="" />
       </div>
     </div>
 
@@ -110,6 +111,8 @@ function Profile() {
 </div>
 </div>
   
+
+  <Footer/>
   </>
 
 
