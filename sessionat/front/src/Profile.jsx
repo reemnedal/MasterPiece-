@@ -1,8 +1,8 @@
 import img from './imgs/userr.png'
-import Nav from './Nav';
+import Nav from "./Components/Nav";
 
 import img3 from "./imgs/tt.png"
-import Footer from './Footer';
+import Footer from './Components/Footer';
 function Profile() {
     return (  
   <>

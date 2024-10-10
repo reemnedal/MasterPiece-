@@ -1,54 +1,92 @@
-// import {Route,Routes,BrowserRouter } from "react-router-dom";
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Nav from './Nav'
-import Hero from './Hero'
-import Signup from './signup'
-import Login from './Login'
-import Profile from './Profile'
- 
-import {Route,Routes,BrowserRouter } from "react-router-dom";
-import Booking from './Booking'
-import Details from './details'
-import Payment from './Payment'
- 
+// import { useState } from 'react';
+// import { Route, Routes, BrowserRouter } from 'react-router-dom';
+// import { Elements } from '@stripe/react-stripe-js'; // Import Elements
+// import { stripePromise } from './stripe'; // Import your stripePromise
+// import './App.css';
+// import Nav from './Components/Nav';
+// import Hero from './Components/Hero';
+// import Profile from './Profile';
+// import Login from './pages/Login';
+// import Signup from './pages/signup';
+// import Details from './pages/details';
+// import Payment from './Components/Payment';
+
+// function App() {
+//   const [count, setCount] = useState(0);
+
+//   return (
+//     <>
+//       <BrowserRouter>
+//         {/* Wrap your Routes with Elements */}
+//         <Elements stripe={stripePromise}>
+//           <Routes>
+//             <Route path='/' element={<Hero />} />
+//             <Route path='/signup' element={<Signup />} />
+//             <Route path='/login' element={<Login />} />
+//             <Route path='/profile' element={<Profile />} />
+//             <Route path='/details/:phoId' element={<Details />} />
+//             <Route path='/payment' element={<Payment />} />
+//           </Routes>
+//         </Elements>
+//       </BrowserRouter>
+//     </>
+//   );
+// }
+
+// export default App;
+
+
+
+import { useState } from 'react';
+import { Route, Routes, BrowserRouter, useLocation } from 'react-router-dom';
+import { Elements } from '@stripe/react-stripe-js';
+import { stripePromise } from './stripe';
+import './App.css';
+import Nav from './Components/Nav';
+import Hero from './Components/Hero';
+import Profile from './Profile';
+import Login from './pages/Login';
+import Signup from './pages/signup';
+import Details from './pages/details';
+import Payment from './Components/Payment';
+import Main from './pages/photographer/mainPage';
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+
+  // Define a component that can access useLocation within BrowserRouter
+  const Layout = () => {
+    const location = useLocation(); // Access the current route
+
+    // List of routes where you don't want to show Nav
+    const noNavRoutes = ['/signup', '/Login'];
+
+    return (
+      <>
+        {/* Conditionally render Nav based on the current route */}
+        {!noNavRoutes.includes(location.pathname) && <Nav />}
+
+        {/* Wrap your Routes with Elements */}
+        <Elements stripe={stripePromise}>
+          <Routes>
+            <Route path='/' element={<Hero />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/Login' element={<Login />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/details/:phoId' element={<Details />} />
+            <Route path='/payment' element={<Payment />} />
+            <Route path='/photographerProfile' element={<Main />} />
+          </Routes>
+        </Elements>
+      </>
+    );
+  };
 
   return (
-    <>
- 
-{/* <Nav/>
- <Hero/>
- <Signup/>
-  <Login/>
-  <Contact/>
-  <Profile/> */}
- 
- 
- 
-  <BrowserRouter>
-  
- <Routes> 
-
-
- 
-   <Route path='/' element={<Hero/>}/>
-   <Route path='/signup' element={<Signup/>}/>
-   <Route path='/login' element={<Login/>}/>
-    <Route path='/profile' element={<Profile/>}/>  
-   <Route path='/booking' element={<Booking/>}/>  
-   <Route path='/details' element={<Details/>}/>  
-   <Route path='/payment' element={<Payment/>}/>  
-  
- 
- </Routes>  
- </BrowserRouter>  
- 
-     </>
-  )
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
