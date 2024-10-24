@@ -68,4 +68,5 @@ The current photography booking ecosystem is fragmented, making it challenging f
 
 
 [visit Figma](https://www.figma.com/design/W4P2Ir10sKXffPSyGY8mlZ/Masterpiece?node-id=0-1&t=TXFtdbGXLZ6aYcnE-1))
+[visit Figma](https://trello.com/invite/b/671a2d6fbe5d5c07392d74fe/ATTIf18bcda45f1e8c3e92c07d3704a6d1e69C0DC754/masterpiece))
 
