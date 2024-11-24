@@ -48,7 +48,9 @@ const Nav = () => {
     role === 'photographer' && { to: "/photographerProfile", label: "Photographer Profile" },
     ...(role ? [] : [{ to: "/signup", label: "Signup" }, { to: "/Login", label: "Login" }]),
     { to: "/catalog", label: "Sessions" },
+    { to: "/cameraman", label: "Photographers" },
     { to: "/products", label: "Products" },
+    { to: "/tips", label: "Tips" },
     role === ('user' || 'photographer' )&& { to: "/cart", label: "Cart" },
 
   ].filter(item => item && item.to !== null);

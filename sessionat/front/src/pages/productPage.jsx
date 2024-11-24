@@ -15,9 +15,18 @@ function Products() {
 
   const itemsPerPage = 8;
 
+  const categories = [
+    { id: '', label: 'All' },
+    { id: 'camera', label: 'Cameras' },
+    { id: 'lens', label: 'Lenses' },
+    { id: 'lighting', label: 'Lighting' },
+    { id: 'camera bag', label: 'Camera Bags' },
+    { id: 'memory card', label: 'Memory Cards' },
+    { id: 'others', label: 'Others' }
+  ];
+
   const closeModal = () => setSelectedProduct(null);
   const handleSearchChange = (e) => setSearchQuery(e.target.value.toLowerCase());
-  const handleCategoryChange = (e) => setSelectedCategory(e.target.value);
 
   const filteredData = data
     ?.filter((product) => 
@@ -109,12 +118,12 @@ function Products() {
   }
 
   return (
-    <div className="min-h-screen  bg-gradient-to-b from-white to-purple-50 pt-24 pb-12">
+    <div className="min-h-screen bg-gradient-to-b from-white to-purple-50 pt-24 pb-12">
       <div className="container mx-auto px-4">
         {/* Search and Filter Section */}
-        <div className="bg-white rounded-lg  p-6 mb-8">
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="relative flex-grow">
+        <div className="bg-white rounded-lg p-6 mb-8">
+          <div className="flex flex-col space-y-4">
+            <div className="relative">
               <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input 
                 type="text"
@@ -124,19 +133,23 @@ function Products() {
                 className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-[#704e81] transition-colors"
               />
             </div>
-            <select 
-              value={selectedCategory} 
-              onChange={handleCategoryChange} 
-              className="py-3 px-4 border border-gray-200 rounded-lg focus:outline-none focus:border-[#704e81] transition-colors md:w-48"
-            >
-              <option value="">All Categories</option>
-              <option value="camera">Cameras</option>
-              <option value="lens">Lenses</option>
-              <option value="lighting">Lighting</option>
-              <option value="camera bag">Camera Bags</option>
-              <option value="memory card">Memory Cards</option>
-              <option value="others">Others</option>
-            </select>
+            
+            {/* Category Filter Buttons */}
+            <div className="flex flex-wrap gap-2">
+              {categories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`px-4 py-2 rounded-full transition duration-200 ${
+                    selectedCategory === category.id
+                      ? 'bg-[#704e81] text-white'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  {category.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -316,7 +329,7 @@ function Products() {
                     </div>
                     
                     <div className="flex justify-between items-center pt-4">
-                      <p className="text-lg font-semibold text-[#704e81]">
+                    <p className="text-lg font-semibold text-[#704e81]">
                         Total: {getTotalPrice(selectedProduct.product_id, selectedProduct.price).toFixed(2)} JD
                       </p>
                       <button 
@@ -325,31 +338,31 @@ function Products() {
                           closeModal();
                         }}
                         className="bg-[#704e81] text-white px-6 py-3 rounded-lg hover:bg-[#5a3d6a] transition duration-200 flex items-center gap-2"
-                        >
-                          <FaShoppingCart />
-                          Add to Cart
-                        </button>
-                      </div>
+                      >
+                        <FaShoppingCart />
+                        Add to Cart
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          )}
-  
-          {/* Empty State */}
-          {paginatedData && paginatedData.length === 0 && (
-            <div className="bg-white rounded-lg shadow-lg p-8 text-center mt-8">
-              <FaSearch className="text-gray-400 text-5xl mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-700 mb-2">No Products Found</h3>
-              <p className="text-gray-600">
-                Try adjusting your search or filter to find what you're looking for.
-              </p>
-            </div>
-          )}
-        </div>
+          </div>
+        )}
+
+        {/* Empty State */}
+        {paginatedData && paginatedData.length === 0 && (
+          <div className="bg-white rounded-lg shadow-lg p-8 text-center mt-8">
+            <FaSearch className="text-gray-400 text-5xl mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-700 mb-2">No Products Found</h3>
+            <p className="text-gray-600">
+              Try adjusting your search or filter to find what you're looking for.
+            </p>
+          </div>
+        )}
       </div>
-    );
-  }
-  
-  export default Products;
+    </div>
+  );
+}
+
+export default Products;

@@ -4,6 +4,7 @@ import PhoProfile from './phoProfile';
 import SessionManagement from './Session Management';
 import RightSection from './rightSectionNameImage';
 import ProfilePortfolio from './portfolio';
+import BookedSessions from './bookedSessions';
 
 const photographerData = {
   name: "Jeremy Rose",
@@ -49,8 +50,8 @@ const Main = () => {
     { id: 'profile', label: 'Profile', icon: User },
     { id: 'sessions', label: 'Sessions', icon: Calendar },
     { id: 'portfolio', label: 'Portfolio', icon: Camera },
-    { id: 'pricing', label: 'Pricing', icon: DollarSign },
-    { id: 'contact', label: 'Contact', icon: Mail },
+    { id: 'Booked Sessions', label: 'Booked Sessions', icon:  Calendar },
+    // { id: 'contact', label: 'Contact', icon: Mail },
   ];
 
   const renderTabContent = () => {
@@ -63,12 +64,9 @@ const Main = () => {
         return (
           <ProfilePortfolio/>
         );
-      case 'pricing':
+      case 'Booked Sessions':
         return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Pricing</h2>
-            <div>Pricing content goes here</div>
-          </div>
+       <BookedSessions/>
         );
       case 'contact':
         return (
@@ -88,13 +86,9 @@ const Main = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-purple-50 mt-32">
+    <div className="min-h-screen bg-gradient-to-b  from-white to-purple-50 mt-32">
       {/* Navbar */}
-      <nav className="bg-[#704e81] text-white p-4 fixed top-0 w-full z-10">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-2xl font-bold">SESSIONAT</h1>
-        </div>
-      </nav>
+     
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto pt-20 px-4">

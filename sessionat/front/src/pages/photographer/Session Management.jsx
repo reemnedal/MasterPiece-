@@ -119,7 +119,7 @@ function SessionManagement() {
         <h2 className="text-2xl font-bold">Session Management</h2>
         <button
           onClick={() => setIsAddModalOpen(true)} // Open add session modal
-          className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+          className="bg-[#704e81] hover:bg-[#704e81] text-white font-bold py-2 px-4 rounded"
         >
           Add Session
         </button>
@@ -132,18 +132,18 @@ function SessionManagement() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {sessions.map((session) => (
             <div key={session.session_id} className="border rounded-lg overflow-hidden shadow-lg">
-              <div className="bg-gray-100 px-4 py-2 flex justify-between items-center">
+              <div className="bg-[#704e81] px-4 py-2 flex justify-between items-center">
                 <h3 className="font-semibold">Session {session.session_id}</h3>
                 <div>
                   <button
                     onClick={() => handleEdit(session)}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded mr-2"
+                    className="bg-[#704e81]  text-white font-bold py-1 px-2 rounded mr-2"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(session.session_id)}
-                    className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded"
+                    className="   text-black  text-white font-bold py-1 px-2 rounded"
                   >
                     Delete
                   </button>
@@ -326,7 +326,7 @@ function SessionManagement() {
               <div className="flex justify-between">
                 <button
                   type="submit"
-                  className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+                  className="bg-[#704e81] hover:  text-white font-bold py-2 px-4 rounded"
                 >
                   Add
                 </button>

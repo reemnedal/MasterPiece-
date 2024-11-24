@@ -1,6 +1,9 @@
 // Import the database pool from config
 const pool = require('../config/db');
 
+//also i added category column
+
+
 // Define the function to create the 'users' table
 const createUsersTable = async () => {
   const query = `

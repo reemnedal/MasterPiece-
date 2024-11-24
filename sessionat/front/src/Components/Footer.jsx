@@ -1,81 +1,100 @@
-function Footer() {
-    return ( 
- <>
- 
- 
- 
-<footer class="relative bg-[#704e81] pt-8 pb-6">
-  <div class="container mx-auto px-4">
-    <div class="flex flex-wrap text-left lg:text-left">
-      <div class="w-full lg:w-6/12 px-4">
-        <h4 class="text-3xl fonat-semibold text-blueGray-700">Let's keep in touch!</h4>
-        <h5 class="text-lg mt-0 mb-2 text-blueGray-600">
-          Find us on any of these platforms, we respond 1-2 business days.
-        </h5>
-        <div class="mt-6 lg:mb-0 mb-6">
-          <button class="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
-            <i class="fab fa-twitter"></i></button><button class="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
-            <i class="fab fa-facebook-square"></i></button><button class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
-            <i class="fab fa-dribbble"></i></button><button class="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
-            <i class="fab fa-github"></i>
-          </button>
-        </div>
-      </div>
-      <div class="w-full lg:w-6/12 px-4">
-        <div class="flex flex-wrap items-top mb-6">
-          <div class="w-full lg:w-4/12 px-4 ml-auto">
-            <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Useful Links</span>
-            <ul class="list-unstyled">
-              <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/presentation?ref=njs-profile">About Us</a>
-              </li>
-              <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://blog.creative-tim.com?ref=njs-profile">Blog</a>
-              </li>
-              <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.github.com/creativetimofficial?ref=njs-profile">Github</a>
-              </li>
-              <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile">Free Products</a>
-              </li>
-            </ul>
-          </div>
-          <div class="w-full lg:w-4/12 px-4">
-            <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Other Resources</span>
-            <ul class="list-unstyled">
-              <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-profile">MIT License</a>
-              </li>
-              <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/terms?ref=njs-profile">Terms &amp; Conditions</a>
-              </li>
-              <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/privacy?ref=njs-profile">Privacy Policy</a>
-              </li>
-              <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/contact-us?ref=njs-profile">Contact Us</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr class="my-6 border-blueGray-300"/>
-    <div class="flex flex-wrap items-center md:justify-between justify-center">
-      <div class="w-full md:w-4/12 px-4 mx-auto text-center">
-        <div class="text-sm text-blueGray-500 font-semibold py-1">
-          Copyright © <span id="get-current-year">2024</span><a href="https://www.creative-tim.com/product/notus-js" class="text-blueGray-500 hover:text-gray-800" target="_blank"> </a>
-          <a href="https://www.creative-tim.com?ref=njs-profile" class="text-blueGray-500 hover:text-blueGray-800">Reem</a>.
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
- 
- </>
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 
+const Footer = () => {
+  const currentYear = new Date().getFullYear();
 
-     );
-}
+  const footerLinks = [
+    {
+      title: "Services",
+      links: [
+        { name: "Photographers", path: "/cameraman" },
+        { name: "Products", path: "/products" },
+        { name: "Courses", path: "/courses" },
+        { name: "Catalog", path: "/catalog" },
+      ]
+    },
+    {
+      title: "Account",
+      links: [
+        { name: "Sign Up", path: "/signup" },
+        { name: "Login", path: "/login" },
+        { name: "Profile", path: "/profile" },
+        { name: "Cart", path: "/cart" },
+      ]
+    },
+    {
+      title: "Company",
+      links: [
+        { name: "About Us", path: "/about" },
+        { name: "Contact", path: "/contact" },
+        { name: "Join us as photographer", path: "/signupPho" },
+      ]
+    }
+  ];
+
+  const socialLinks = [
+    { Icon: Facebook, href: "#" },
+    { Icon: Instagram, href: "#" },
+    { Icon: Twitter, href: "#" },
+    { Icon: Youtube, href: "#" }
+  ];
+
+  return (
+    <footer className="bg-[#704e81] text-white">
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Brand Section */}
+          <div className="space-y-4">
+            <h3 className="text-2xl font-bold">Sessionat</h3>
+            <p className="text-gray-200">
+              Capture your special moments with our professional photography services.
+            </p>
+            {/* Social Links */}
+            {/* <div className="flex space-x-4 mt-4">
+              {socialLinks.map(({ Icon, href }, index) => (
+                <a
+                  key={index}
+                  href={href}
+                  className="bg-white p-2 rounded-full text-[#704e81] hover:bg-gray-100 transition-colors duration-200"
+                >
+                  <Icon size={20} />
+                </a>
+              ))}
+            </div> */}
+          </div>
+
+          {/* Links Sections */}
+          {footerLinks.map((section, index) => (
+            <div key={index} className="space-y-4">
+              <h4 className="text-lg font-semibold">{section.title}</h4>
+              <ul className="space-y-2">
+                {section.links.map((link, linkIndex) => (
+                  <li key={linkIndex}>
+                    <Link
+                      to={link.path}
+                      className="text-gray-200 hover:text-white transition-colors duration-200"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Footer Bottom */}
+        <div className="mt-12 pt-8 border-t border-gray-200/20">
+          <div className="text-center text-gray-200">
+            <p>© {currentYear} sessionat. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
 
 export default Footer;

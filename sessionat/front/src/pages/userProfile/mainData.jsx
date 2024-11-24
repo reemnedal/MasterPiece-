@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function MainData() {
   const [UserData, setUserData] = useState({});
@@ -17,6 +18,12 @@ function MainData() {
       } catch (err) {
         setError("Error fetching photographer data");
         setLoading(false);
+        // Display SweetAlert on error
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong while fetching the data!',
+        });
       }
     };
 
@@ -37,7 +44,8 @@ function MainData() {
         <p className="text-gray-600 mt-1">{UserData.email}</p>
         <p className="text-gray-600">{UserData.city}</p>
         <div className="mt-4">
-          {/* <button     className="bg-[#704e81] text-white px-6 py-2 rounded-lg hover:bg-[#5d3d6d] transition">
+          {/* Optional Edit Profile Button */}
+          {/* <button className="bg-[#704e81] text-white px-6 py-2 rounded-lg hover:bg-[#5d3d6d] transition">
             Edit Profile
           </button> */}
         </div>

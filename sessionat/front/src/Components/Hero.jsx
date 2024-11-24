@@ -9,6 +9,8 @@ import Cameraman from "./Cameraman";
 import Footer from "./Footer";
 import SubscriptionPlans from "./subscription";
 import Cookies from 'js-cookie'; // Add this line at the top
+import FAQSection from "./FAQ";
+import CategoryAndCityGrid from "./categoryInHomePage";
 
 
 const Hero = () => {
@@ -79,11 +81,17 @@ const Hero = () => {
           </div>
         </section>
         <Images />
+       
       
         {userRole === "photographer" && <SubscriptionPlans />}
         {/* <Feedback /> */}
         <Cameraman />
+        <br /><br />
+        <CategoryAndCityGrid/>
+        <div className=" bg-gradient-to-b from-white to-purple-50"><FAQSection/></div>
+        
       </main>
+     
       <Footer />
     </div>
   );

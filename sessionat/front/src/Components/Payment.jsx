@@ -85,7 +85,7 @@ import Swal from 'sweetalert2';
             text: 'Thank you for your payment!',
             icon: 'success',
           }).then(() => {
-            navigate('/'); // Navigate to home page
+            navigate('/payment-success'); // Navigate to home page
           });        } else {
           setPaymentStatus('error');
         }
@@ -132,7 +132,8 @@ import Swal from 'sweetalert2';
             <div className="p-6 space-y-4">
               <div className="flex items-center space-x-4 mb-4">
                 <img 
-                  src={photographerDetails.profile_pic || '/api/placeholder/100/100'} 
+                  // src={photographerDetails.profile_pic || '/api/placeholder/100/100'} 
+                src={`http://localhost:5000${photographerDetails?.profile_pic}`}
                   alt={photographerDetails.full_name} 
                   className="w-16 h-16 rounded-full object-cover"
                 />

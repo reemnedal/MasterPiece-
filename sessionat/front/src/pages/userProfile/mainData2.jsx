@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2'; // Import SweetAlert2
 
 const MainData2 = () => {
   const [user, setUserData] = useState(null);
@@ -45,12 +46,19 @@ const MainData2 = () => {
       if (response.ok) {
         setUserData(editedData);
         setIsEditing(false);
-        alert('Profile updated successfully!');
+        Swal.fire({
+          icon: 'success',
+          title: 'Profile updated successfully!',
+        });
       } else {
         throw new Error('Failed to update profile');
       }
     } catch (err) {
-      alert('Error updating profile');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error updating profile',
+        text: err.message || 'An error occurred while updating your profile.',
+      });
     }
   };
 
@@ -100,7 +108,7 @@ const MainData2 = () => {
         </div>
 
         <div className="space-y-4">
-          {[
+          {[ 
             { label: 'Email', key: 'email' },
             { label: 'Username', key: 'full_name' },
             { label: 'Phone', key: 'phone_number' },

@@ -1,171 +1,194 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Camera, User, Calendar, Heart, Image, ChevronRight } from 'lucide-react';
 import MainData from './mainData';
 import MainData2 from './mainData2';
 import Sessions from './session';
+import Userfavorites from './favorites';
+import Gallery from './gallery';
+
+const TABS = [
+  { id: 'profile', label: 'Profile', icon: User, component: MainData2 },
+  { id: 'sessions', label: 'Sessions', icon: Calendar, component: Sessions },
+  { id: 'favorites', label: 'Favorites', icon: Heart, component: Userfavorites },
+  { id: 'gallery', label: 'Gallery', icon: Image, component: Gallery },
+];
+
+const TabButton = ({ tab, label, icon: Icon, isActive, onClick }) => (
+  <button
+    onClick={onClick}
+    className={`
+      flex items-center w-full p-4 gap-3 
+      transition-all duration-200 ease-in-out
+      rounded-lg font-medium
+      ${isActive 
+        ? 'bg-[#704e81] text-white shadow-lg transform scale-105' 
+        : 'text-gray-600 hover:bg-[#704e81] hover:text-white'
+      }
+    `}
+  >
+    <Icon size={20} className={isActive ? 'animate-pulse' : ''} />
+    <span>{label}</span>
+    {isActive && (
+      <ChevronRight 
+        className="ml-auto transform transition-transform duration-200" 
+        size={20} 
+      />
+    )}
+  </button>
+);
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('profile');
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
-  // Same user data as before
-  const user = {
-    name: "Emma Rodriguez",
-    email: "emma.r@example.com",
-    phone: "+1 (555) 123-4567",
-    location: "Los Angeles, CA",
-    profileImage: null,
-    upcomingSessions: [
-      {
-        id: 1,
-        photographer: "John Smith",
-        date: "2024-11-15",
-        time: "14:00",
-        type: "Family Portrait",
-        location: "Venice Beach",
-        status: "Confirmed"
-      },
-      {
-        id: 2,
-        photographer: "Maria Garcia",
-        date: "2024-12-01",
-        time: "10:00",
-        type: "Wedding Photos",
-        location: "Rose Garden",
-        status: "Pending"
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/userProfile', {
+          credentials: 'include',
+        });
+        const data = await response.json();
+        setUserData(data);
+        setLoading(false);
+      } catch (err) {
+        setError("Error fetching user data");
+        setLoading(false);
       }
-    ],
-    pastSessions: [
-      {
-        id: 3,
-        photographer: "Alex Wong",
-        date: "2024-09-20",
-        type: "Engagement Photos",
-        photos: 45,
-        status: "Completed"
-      }
-    ],
-    favoritePhotographers: [
-      {
-        id: 1,
-        name: "John Smith",
-        specialty: "Family Portraits",
-        rating: 4.9,
-        bookings: 3
-      },
-      {
-        id: 2,
-        name: "Maria Garcia",
-        specialty: "Wedding Photography",
-        rating: 4.8,
-        bookings: 1
-      }
-    ],
-    recentPhotos: [
-      { id: 1, session: "Engagement Photos", date: "2024-09-20" },
-      { id: 2, session: "Engagement Photos", date: "2024-09-20" },
-      { id: 3, session: "Engagement Photos", date: "2024-09-20" }
-    ]
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      setSelectedFile(file);
+      setError(null);
+    } else {
+      setError("Please select a valid image file");
+    }
   };
 
-  const TabButton = ({ tab, label, icon: Icon }) => (
-    <button
-      onClick={() => setActiveTab(tab)}
-      className={`flex items-center w-full p-4 gap-3 transition-all ${
-        activeTab === tab
-          ? 'bg-[#704e81] text-white rounded-lg'
-          : 'text-gray-600 hover:bg-purple-50 rounded-lg'
-      }`}
-    >
-      <Icon size={20} />
-      <span className="font-medium">{label}</span>
-      {activeTab === tab && <ChevronRight className="ml-auto" size={20} />}
-    </button>
-  );
+  const handleUpload = async () => {
+    if (!selectedFile) {
+      setError("Please select a file first");
+      return;
+    }
+
+    setUploading(true);
+    const formData = new FormData();
+    formData.append('profile_pic', selectedFile);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/pho/uploadProfilePic', {
+        method: 'POST',
+        credentials: 'include',
+        body: formData
+      });
+      const data = await response.json();
+      
+      if (response.ok) {
+        setUserData(prev => ({ ...prev, profile_pic: data.profile_pic }));
+        setSelectedFile(null);
+        setError(null);
+      } else {
+        throw new Error(data.message || "Failed to upload photo");
+      }
+    } catch (err) {
+      setError("Error uploading photo");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 lg:p-8 m-32">
-      <div className="max-w-7xl mx-auto">
-        {/* Profile Header Card */}
-        <div className="bg-white rounded-xl shadow-md p-6 mb-8">
-          <div className="flex flex-col md:flex-row items-center gap-6">
-          
-  
-
-         {/* <MainData/> */}
-          </div>
-        </div>
-
-        {/* Main Content with Vertical Tabs */}
-        <div className="flex flex-col md:flex-row gap-8">
-          {/* Vertical Tabs Navigation */}
-          <div className="md:w-64 space-y-2">
-            <TabButton tab="profile" label="Profile" icon={User} />
-            <TabButton tab="sessions" label="Sessions" icon={Calendar} />
-            <TabButton tab="favorites" label="Favorites" icon={Heart} />
-            <TabButton tab="gallery" label="Gallery" icon={Image} />
-          </div>
-
-          {/* Tab Content */}
-          <div className="flex-1">
-            <div className="bg-white rounded-xl shadow-md p-6">
-              {/* Profile Tab */}
-              {activeTab === 'profile' && (
-             <MainData2/>
-              )}
-
-              {/* Sessions Tab */}
-              {activeTab === 'sessions' && (
-               <Sessions/>
-              )}
-
-              {/* Favorites Tab */}
-              {activeTab === 'favorites' && (
-                <div>
-                  <h2 className="text-2xl font-semibold text-[#704e81] mb-6">Favorite Photographers</h2>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {user.favoritePhotographers.map(photographer => (
-                      <div key={photographer.id} className="bg-white border rounded-xl p-6 hover:shadow-lg transition">
-                        <div className="flex items-start justify-between">
-                          <div>
-                            <h3 className="text-xl font-medium">{photographer.name}</h3>
-                            <p className="text-gray-600 mt-1">{photographer.specialty}</p>
-                            <div className="mt-3 flex items-center gap-4">
-                              <span className="flex items-center text-yellow-500">
-                                ★ {photographer.rating}
-                              </span>
-                              <span className="text-gray-600">{photographer.bookings} bookings</span>
-                            </div>
-                          </div>
-                          <button className="text-[#704e81]">
-                            <Heart size={24} />
-                          </button>
-                        </div>
-                        <button className="mt-4 w-full bg-[#704e81] text-white py-3 rounded-lg hover:bg-[#5d3d6d] transition">
-                          Book Session
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+    <div className="mt-32 bg-gradient-to-b from-white via-purple-50 to-purple-100">
+      <div className="max-w-7xl mx-auto p-4 lg:p-8">
+        {/* Profile Header */}
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+          <div className="flex items-center gap-6">
+            <div className="relative">
+              {/* Responsive Image */}
+              <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-[#704e81] flex items-center justify-center overflow-hidden">
+                {userData.profile_pic ? (
+                  <img 
+                    src={`http://localhost:5000${userData.profile_pic}`}
+                    alt="User Profile" 
+                    className="object-cover w-full h-full"
+                  />
+                ) : (
+                  <Camera size={32} className="text-purple-500" />
+                )}
+              </div>
+              <label className="absolute bottom-0 right-0 cursor-pointer">
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={handleFileChange}
+                  accept="image/*"
+                />
+                <div className="bg-[#704e81] p-2 rounded-full text-white hover:bg-[#704e81] transition-colors">
+                  <Camera size={16} />
+                </div>
+              </label>
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">{userData.full_name}</h1>
+              <p className="text-gray-500">{userData.city}</p>
+              {selectedFile && (
+                <div className="mt-2">
+                  <button
+                    onClick={handleUpload}
+                    disabled={uploading}
+                    className="bg-[#704e81] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#5a3d68] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {uploading ? 'Uploading...' : 'Upload New Photo'}
+                  </button>
                 </div>
               )}
-
-              {/* Gallery Tab */}
-              {activeTab === 'gallery' && (
-                <div>
-                  <h2 className="text-2xl font-semibold text-[#704e81] mb-6">My Photos</h2>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {user.recentPhotos.map(photo => (
-                      <div key={photo.id} className="aspect-square bg-gray-100 rounded-lg overflow-hidden hover:shadow-lg transition cursor-pointer">
-                        <div className="w-full h-full flex items-center justify-center bg-purple-50 text-[#704e81] group hover:bg-[#704e81] hover:text-white transition">
-                          <span className="font-medium">Photo {photo.id}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              {error && (
+                <p className="text-red-500 text-sm mt-2">{error}</p>
               )}
             </div>
           </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="flex flex-col md:flex-row gap-8">
+          {/* Sidebar Navigation */}
+          <nav className="md:w-64 space-y-2 bg-white p-4 rounded-xl shadow-lg self-start">
+            {TABS.map(({ id, label, icon }) => (
+              <TabButton
+                key={id}
+                tab={id}
+                label={label}
+                icon={icon}
+                isActive={activeTab === id}
+                onClick={() => setActiveTab(id)}
+              />
+            ))}
+          </nav>
+
+          {/* Content Area */}
+          <main className="flex-1">
+            <div className="bg-white rounded-xl shadow-lg p-6 min-h-[500px]">
+              {TABS.map(({ id, component: Component }) => (
+                activeTab === id && <Component key={id} />
+              ))}
+            </div>
+          </main>
         </div>
       </div>
     </div>

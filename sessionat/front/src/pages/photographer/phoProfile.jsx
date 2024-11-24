@@ -62,11 +62,11 @@ function PhoProfile() {
     >
       <div className="absolute top-4 right-4">
         {isEditing ? (
-          <button onClick={handleSave} className="flex items-center bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+          <button onClick={handleSave} className="flex items-center bg-[#704e81] text-white px-4 py-2 rounded ">
             <FiSave className="mr-2" /> Save
           </button>
         ) : (
-          <button onClick={handleEditToggle} className="flex items-center bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+          <button onClick={handleEditToggle} className="flex items-center bg-[#704e81] text-white px-4 py-2 rounded  ">
             <FaEdit className="mr-2" /> Edit Profile
           </button>
         )}

@@ -122,9 +122,9 @@ function Sessions() {
                                         
                                     </div>
                                     <div>
-                                        <button className="bg-green-500 text-white px-4 py-2 rounded">
+                                        {/* <button className="bg-green-500 text-white px-4 py-2 rounded">
                                             View Gallery
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </div>
                             </div>

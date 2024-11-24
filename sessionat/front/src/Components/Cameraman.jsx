@@ -9,8 +9,8 @@ function Cameraman() {
 
   return (
     <>
-      <div className="container mx-auto my-10 px-4">
-        <div className="mb-12 space-y-5 text-center">
+      <div className="container mx-auto my-5 px-4">
+        <div className="mb-12 space-y-2 text-center">
           <h1 className="text-3xl font-semibold text-[#704e81] md:text-4xl lg:text-5xl">
             Meet Your <br /> Future Photographer
           </h1>
@@ -19,12 +19,16 @@ function Cameraman() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 ">
           {data && data.map((pho) => (
-            <div key={pho.user_id} className="bg-[#f3f4f6] h-full rounded-lg shadow-lg overflow-hidden flex flex-col">
+            <Link 
+              key={pho.user_id} 
+              to={`/pp/${pho.user_id}`} 
+              className="bg-[#f3f4f6] h-full rounded-lg shadow-lg overflow-hidden flex flex-col"
+            >
               <div className="flex justify-center p-4">
                 <img 
-                  src={pho.profile_pic} 
+                  src={`http://localhost:5000${pho.profile_pic}`}
                   alt={`Display Picture of ${pho.full_name}`} 
                   className="rounded-full object-cover h-32 w-32 shadow-md"
                 />
@@ -35,19 +39,11 @@ function Cameraman() {
                 <p className="text-gray-600 text-base text-center mt-2 flex-1">
                   {pho.description}
                 </p>
-                <div className="mt-4 flex flex-wrap justify-center gap-2">
-                  <Link
-                    className="bg-[#704e81] text-white px-4 py-2 rounded shadow hover:bg-[#704e61]"
-                    to={`/details/${pho.user_id}`} 
-                  >
-                    View More
-                  </Link>
-
-
-                
-                </div>
+                {/* <div className="mt-4 flex flex-wrap justify-center gap-2"> */}
+                  {/* <p className="text-[#704e81] text-lg text-center">View More</p> */}
+                {/* </div> */}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

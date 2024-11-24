@@ -22,6 +22,8 @@ const fetchPhotographers = async (req, res) => {
     `;
 
     const { rows } = await pool.query(query); 
+   
+
 
     // Check if any photographers were found
     if (rows.length === 0) {

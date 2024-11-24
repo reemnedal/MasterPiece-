@@ -1,6 +1,6 @@
  
 
-
+import global from 'global';
 import { useState } from 'react';
 import { Route, Routes, BrowserRouter, useLocation } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
@@ -21,6 +21,11 @@ import Products from './pages/productPage';
 import Cart from './pages/cart';
 import CheckoutProducts from './pages/checkoutProducts';
 import PaymentSuccess from './Components/paymentSuccess';
+import Courses from './pages/courses';
+import VideoChat from './Components/video';
+import CameraMan from './pages/Cameraman';
+import ProductComponent from './Components/test';
+import FAQSection from './Components/FAQ';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -30,7 +35,7 @@ function App() {
     const location = useLocation(); // Access the current route
 
     // List of routes where you don't want to show Nav
-    const noNavRoutes = ['/signup', '/Login','/signupPho','/payment-success','/checkoutProducts'];
+    const noNavRoutes = ['/signup', '/Login','/signupPho','/payment-success','/checkoutProducts','/payment'];
 
     return (
       <>
@@ -50,9 +55,15 @@ function App() {
             <Route path='/photographerProfile' element={<Main />} />
             <Route path='/catalog' element={<Catalog />} />
             <Route path='/products' element={<Products />} />
+            <Route path='/Tips' element={<Courses />} />
+            <Route path='/cameraman' element={<CameraMan/>} />
             <Route path='/cart' element={<Cart/>} />
             <Route path='/checkoutProducts' element={<CheckoutProducts/>} />
             <Route path='/payment-success' element={<PaymentSuccess/>} />
+            <Route path='/videoChat' element={<VideoChat/>} />
+            <Route path='/pp/:phoId' element={<ProductComponent/>} />
+             {/* <Route path='/contact' element={<Contact/>} />
+            <Route path='/about' element={<About/>} /> */}
           </Routes>
         </Elements>
       </>
